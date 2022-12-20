@@ -112,7 +112,7 @@
   <clr-modal [(clrModalOpen)]="youtubeTrailerOpen" [clrModalSize]="'lg'">
     <h3 class="modal-title">{{ movie.title }} Trailer</h3>
     <div class="modal-body">
-      <iframe width="560" height="315" style="display: block; margin: 0 auto" [src]="sanitizeYouTubeUrl(movie.youtubeTrailerId)" title="YouTube Video Player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="100%" height="315" style="display: block; margin: 0 auto" [src]="sanitizeYouTubeUrl(movie.youtubeTrailerId)" title="YouTube Video Player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="youtubeTrailerOpen = false">Close</button>
