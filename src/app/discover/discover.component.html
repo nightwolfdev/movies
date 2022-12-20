@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Discover</h1>
+
+  <form clrForm clrLayout="compact" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <clr-select-container>
+      <label for="genre">Genre</label>
+      <select clrSelect id="genre" formControlName="with_genres">
+        <option value="">Any Genre</option>
+        <ng-container *ngIf="genres$ | async as genres">
+          <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
+        </ng-container>
+      </select>
+    </clr-select-container>
+
+    <clr-select-container>
+      <label for="rating">Rating</label>
+      <select clrSelect id="rating" formControlName="certification">
+        <option value="">Any Rating</option>
+        <ng-container *ngIf="ratings$ | async as ratings">
+          <option *ngFor="let rating of ratings" [value]="rating.certification">{{ rating.certification }}</option>
+        </ng-container>
+      </select>
+      <clr-control-helper>Less than or equal to the selected rating.</clr-control-helper>
+    </clr-select-container>
+
+    <clr-select-container>
+      <label for="watchProvider">Watch Provider</label>
+      <select clrSelect id="watchProvider" formControlName="with_watch_providers">
+        <option value="">Any Watch Provider</option>
+        <ng-container *ngIf="watchProviders$ | async as watchProviders">
+          <option *ngFor="let watchProvider of watchProviders" [value]="watchProvider.provider_id">{{ watchProvider.provider_name }}</option>
+        </ng-container>
+      </select>
+    </clr-select-container>
+
+    <clr-input-container>
+      <label for="year">Year</label>
+      <input clrInput type="text" id="year" formControlName="year" placeholder="Any Year" />
+      <clr-control-error>Year must be 4 digits.</clr-control-error>
+    </clr-input-container>
+
+    <p>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+    </p>
+  </form>
+
+  <div id="top"></div>
+
+  <ng-container *ngIf="searchResults$ | async as searchResults">
+    <app-pagination [page]="searchResults.page" [totalPages]="searchResults.total_pages" (nextPageEvent)="goToPage($event)"></app-pagination>
+
+    <app-movie-list [displayAll]="true" layout="list" [movies]="searchResults.results"></app-movie-list>
+
+    <app-pagination [page]="searchResults.page" [totalPages]="searchResults.total_pages" (nextPageEvent)="goToPage($event)"></app-pagination>
+  </ng-container>
+</div>

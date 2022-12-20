@@ -1,0 +1,46 @@
+img {
+  border-radius: 0.25rem;
+  height: auto;
+  max-width: 100%;
+}
+
+#backdrop {
+  margin-top: -1.2rem;
+  margin-right: -1.2rem;
+  margin-left: -1.2rem;
+}
+
+#backdropMask {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-bottom: 1.2rem;
+}
+
+#collectionMovieList {
+  h2 {
+    margin-bottom: 1.2rem;
+  }
+}
+
+#contentMask {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.25rem;
+  color: #fff;
+  padding: 1.2rem;
+
+  h1, h2, p {
+    color: #fff;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  a {
+    color: #0072a3;
+  }
+}
+
+#moviePoster {
+  margin-bottom: 1.2rem;
+  margin-top: 1.2rem;
+}

@@ -1,0 +1,58 @@
+<ng-container *ngIf="layout === 'grid'; then grid else list"></ng-container>
+
+<ng-template #grid>
+  <ng-container *ngIf="movies.length === 0">
+    <p>No movies found.</p>
+  </ng-container>
+
+  <div *ngIf="movies.length > 0" class="clr-row">
+    <div class="clr-col-6 clr-col-lg-4 clr-col-xl-2" *ngFor="let movie of movies; let index = index; trackBy: trackById">
+      <ng-container *ngIf="index < limit || displayAll">
+        <div class="movie-list-item">
+          <div class="movie-list-image">
+            <a [routerLink]="['/movie', movie.id]">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : 'https://via.placeholder.com/500?text=NO+IMAGE'" [alt]="movie.title">
+            </a>
+          </div>
+      
+          <h5>
+            <a [routerLink]="['/movie', movie.id]">
+              {{ movie.title }}
+            </a>
+          </h5>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #list>
+  <ng-container *ngIf="movies.length === 0">
+    <p>No movies found.</p>
+  </ng-container>
+  
+  <ng-container *ngFor="let movie of movies; let index = index; trackBy: trackById">
+    <ng-container *ngIf="index < limit || displayAll">
+      <div class="clr-row movie-list-item">
+        <div class="clr-col-sm-12 clr-col-md-2 clr-col-lg-1">
+            <div class="movie-list-image">
+              <a [routerLink]="['/movie', movie.id]">
+                <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w185/' + movie.poster_path : 'https://via.placeholder.com/185?text=NO+IMAGE'" [alt]="movie.title">
+              </a>
+            </div>
+        </div>
+        <div class="clr-col-sm-12 clr-col-md-10 clr-col-lg-11">
+          <h5>
+            <a [routerLink]="['/movie', movie.id]">
+              {{ movie.title }}
+            </a>
+          </h5>
+          <h6>
+            {{ movie.release_date | date: 'longDate' }}
+          </h6>
+          {{ movie.overview }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>

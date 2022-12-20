@@ -1,0 +1,25 @@
+<div class="container">
+  <h2><a routerLink="/now-playing">Now Playing</a></h2>
+  <ng-container *ngIf="nowPlaying$ | async as nowPlaying; else loading">
+    <app-movie-list [movies]="nowPlaying.results"></app-movie-list>
+  </ng-container>
+
+  <h2><a routerLink="/popular">Popular</a></h2>
+  <ng-container *ngIf="popular$ | async as popular; else loading">
+    <app-movie-list [movies]="popular.results"></app-movie-list>
+  </ng-container>
+
+  <h2><a routerLink="/trending">Trending</a></h2>
+  <ng-container *ngIf="trending$ | async as trending; else loading">
+    <app-movie-list [movies]="trending.results"></app-movie-list>
+  </ng-container>
+
+  <h2><a routerLink="/upcoming">Upcoming</a></h2>
+  <ng-container *ngIf="upcoming$ | async as upcoming; else loading">
+    <app-movie-list [movies]="upcoming.results"></app-movie-list>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

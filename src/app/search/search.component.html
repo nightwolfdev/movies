@@ -1,0 +1,15 @@
+<div id="top" class="container">
+  <ng-container *ngIf="searchResults$ | async as searchResults; else loading">
+    <h1>Search Results for {{ getCurrentSearchCriteria().query }}</h1>
+
+    <app-pagination [page]="searchResults.page" [totalPages]="searchResults.total_pages" (nextPageEvent)="goToPage($event)"></app-pagination>
+
+    <app-movie-list [displayAll]="true" layout="list" [movies]="searchResults.results"></app-movie-list>
+
+    <app-pagination [page]="searchResults.page" [totalPages]="searchResults.total_pages" (nextPageEvent)="goToPage($event)"></app-pagination>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

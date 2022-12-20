@@ -1,0 +1,20 @@
+#header {
+  svg {
+    height: 24px;
+    margin-right: 0.25rem;
+    width: 24px;
+  }
+  a svg {
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header .search {
+    justify-content: flex-start;
+    
+    label input {
+      display: unset;
+    }
+  }
+}

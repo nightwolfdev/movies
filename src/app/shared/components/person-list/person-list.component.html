@@ -1,0 +1,23 @@
+<div class="clr-row">
+  <div class="clr-col-6 clr-col-lg-4 clr-col-xl-2" *ngFor="let person of people; let index = index; trackBy: trackById">
+    <ng-container *ngIf="index < limit || displayAll">
+      <div class="person-list-item">
+        <div class="person-list-image">
+          <a [routerLink]="['/person', person.id]">
+            <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w185/' + person.profile_path : 'https://via.placeholder.com/200x300?text=NO+PHOTO'" [alt]="person.name">
+          </a>
+        </div>
+    
+        <h5>
+          <a [routerLink]="['/person', person.id]">
+            {{ person.name }}
+          </a>
+        </h5>
+
+        <h6>
+          {{ person.title }}
+        </h6>
+      </div>
+    </ng-container>
+  </div>
+</div>

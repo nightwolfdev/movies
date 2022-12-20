@@ -1,0 +1,28 @@
+.movie-list-item {
+  margin-bottom: 1rem;
+
+  &:hover {
+    img {
+      filter: brightness(120%);
+      transform: scale(1.125);
+    }
+  }
+
+  .movie-list-image {
+    overflow: hidden;
+
+    img {
+      height: auto;
+      max-width: 100%;
+      transition: all .5s ease;
+    }
+  }
+
+  h5 {
+    margin-top: 0.5rem;
+  }
+
+  h6 {
+    margin-top: 0;
+  }
+}

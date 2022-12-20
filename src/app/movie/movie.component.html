@@ -1,0 +1,125 @@
+<ng-container *ngIf="movie$ | async as movie; else loading">
+  <div id="backdrop" [ngStyle]="{'background-image': movie.backdrop_path ? 'url(https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path + ')' : '', 'background-position': 'center center', 'background-repeat': 'no-repeat', 'background-size': 'cover'}">
+    <div id="backdropMask">
+      <div class="container">
+        <div class="clr-row clr-align-items-center clr-justify-content-center">
+          <div class="clr-col-sm-12 clr-col-md-3">
+            <img id="moviePoster" [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w342/' + movie.poster_path : 'https://via.placeholder.com/400?text=NO+IMAGE'" [alt]="movie.title">
+          </div>
+          <div class="clr-col-sm-12 clr-col-md-8">
+            <div id="contentMask">
+              <h1>{{ movie.title }}</h1>
+              <ng-container *ngIf="movie.rating">
+                <a class="rating" [routerLink]="[]" (click)="getRating(movie.rating)">{{ movie.rating }}</a> &bull;
+              </ng-container> 
+              <ng-container *ngIf="movie.release_date">
+                {{ movie.release_date | date: 'longDate' }}
+              </ng-container>
+              <ng-container *ngIf="movie.genres.length > 0">
+                &bull;
+                <ng-container *ngFor="let genre of movie.genres; let last = last">
+                  <a [routerLink]="['/genre', genre.id]">{{ genre.name }}</a>{{ last ? '' : ', ' }}
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="movie.runtime">
+                &bull; {{ convertRuntime(movie.runtime) }}
+              </ng-container>
+              
+              <p *ngIf="movie.tagline">{{ movie.tagline }}</p>
+              
+              <ng-container *ngIf="movie.overview">
+                <h2>Overview</h2>
+                {{ movie.overview }}
+              </ng-container>
+
+              <ng-container *ngIf="movie.belongs_to_collection">
+                <p>{{ movie.title }} is part of the <a [routerLink]="['/collection', movie.belongs_to_collection.id]">{{ movie.belongs_to_collection.name }}</a>.</p>
+              </ng-container>
+
+              <ng-container *ngIf="movie.youtubeTrailerId">
+                <p>
+                  <button type="button" class="btn btn-primary" (click)="youtubeTrailerOpen = true">Watch Trailer</button>
+                </p>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="clr-row">
+      <div class="clr-col-sm-12 clr-col-md-10">  
+        <ng-container *ngIf="movie.credits.cast.length > 0">
+          <h2>Cast <button *ngIf="movie.credits.cast.length > limit" type="button" class="btn btn-sm" (click)="viewAllCast()">View {{ displayAllCast ? 'Less' : 'All' }}</button></h2>
+          <app-person-list [displayAll]="displayAllCast" [limit]="limit" [people]="movie.credits.cast"></app-person-list>
+        </ng-container>
+
+        <ng-container *ngIf="movie.credits.crew.length > 0">
+          <h2>Crew <button *ngIf="movie.credits.crew.length > limit" type="button" class="btn btn-sm" (click)="viewAllCrew()">View {{ displayAllCrew ? 'Less' : 'All' }}</button></h2>
+          <app-person-list [displayAll]="displayAllCrew" [limit]="limit" [people]="movie.credits.crew"></app-person-list>
+        </ng-container>
+
+        <ng-container *ngIf="movie.similar.results.length > 0">
+          <h2>Similar Movies</h2>
+          <app-movie-list layout="list" [movies]="movie.similar.results"></app-movie-list>
+        </ng-container>
+      </div>
+      <div class="clr-col-sm-12 clr-col-md-2">
+        <div id="externalIds" *ngIf="movie.homepage || movie.external_ids.facebook_id || movie.external_ids.instagram_id || movie.external_ids.twitter_id">
+          <h3>Links</h3>
+          <app-links [homepage]="movie.homepage" [externalIds]="movie.external_ids"></app-links>
+        </div>
+
+        <ng-container *ngIf="movie.status">
+          <h3>Status</h3>
+          {{ movie.status }}
+        </ng-container>
+        
+        <ng-container *ngIf="movie.budget && movie.budget > 0">
+          <h3>Budget</h3>
+          {{ movie.budget | currency }}
+        </ng-container>
+  
+        <ng-container *ngIf="movie.revenue && movie.revenue > 0">
+          <h3>Revenue</h3>
+          {{ movie.revenue | currency }}
+        </ng-container>
+
+        <ng-container *ngIf="movie.keywords.length > 0">
+          <h3>Keywords</h3>
+          <a [routerLink]="['/keyword', keyword.id]" *ngFor="let keyword of movie.keywords">
+            <span class="label">{{ keyword.name }}</span>
+          </a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="rating$ | async as rating">
+    <clr-modal [(clrModalOpen)]="ratingModalOpen">
+      <h3 class="modal-title">{{ rating.certification }}</h3>
+      <div class="modal-body">
+          <p>{{ rating.meaning }}</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="ratingModalOpen = false">Close</button>
+      </div>
+    </clr-modal>
+  </ng-container>
+
+  <clr-modal [(clrModalOpen)]="youtubeTrailerOpen" [clrModalSize]="'lg'">
+    <h3 class="modal-title">{{ movie.title }} Trailer</h3>
+    <div class="modal-body">
+      <iframe width="560" height="315" style="display: block; margin: 0 auto" [src]="sanitizeYouTubeUrl(movie.youtubeTrailerId)" title="YouTube Video Player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="youtubeTrailerOpen = false">Close</button>
+    </div>
+  </clr-modal>
+</ng-container>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

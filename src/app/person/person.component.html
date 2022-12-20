@@ -1,0 +1,37 @@
+<div class="container">
+  <ng-container *ngIf="person$ | async as person; else loading">
+    <div class="clr-row">
+      <div class="clr-col-sm-12 clr-col-md-4">
+        <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/h632/' + person.profile_path : 'https://via.placeholder.com/800?text=NO+IMAGE'" [alt]="person.name" class="person-profile">
+      </div>
+      <div class="clr-col-sm-12 clr-col-md-8">
+        <h1>{{ person.name }}</h1>
+        {{ person.birthday | date: 'longDate' }} <ng-container *ngIf="person.deathday"> - {{ person.deathday | date: 'longDate' }}</ng-container> &bull; {{ person.known_for_department }} 
+
+        <ng-container *ngIf="person.biography">
+          <h2>Biography</h2>
+          {{ person.biography }}
+        </ng-container>
+
+        <ng-container *ngIf="person.homepage || person.external_ids.facebook_id || person.external_ids.instagram_id || person.external_ids.twitter_id">
+          <h2>Links</h2>
+          <app-links [homepage]="person.homepage" [externalIds]="person.external_ids"></app-links>
+        </ng-container>
+
+        <ng-container *ngIf="person.credits.cast.length > 0">
+          <h2>Cast <button *ngIf="person.credits.cast.length > limit" type="button" class="btn btn-sm" (click)="viewAllCast()">View {{ displayAllCast ? 'Less' : 'All' }}</button></h2>
+          <app-movie-list [displayAll]="displayAllCast" [limit]="limit" [movies]="person.credits.cast"></app-movie-list>
+        </ng-container>
+
+        <ng-container *ngIf="person.credits.crew.length > 0">
+          <h2>Crew <button *ngIf="person.credits.crew.length > limit" type="button" class="btn btn-sm" (click)="viewAllCrew()">View {{ displayAllCrew ? 'Less' : 'All' }}</button></h2>
+          <app-movie-list [displayAll]="displayAllCrew" [limit]="limit" [movies]="person.credits.crew"></app-movie-list>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>
