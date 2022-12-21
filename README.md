@@ -19,7 +19,7 @@ Movies app using Angular, RxJS, TypeScript, and the TMDB API.
 
 ## API Key
 
-In order to make a valid API requet, an API key is required. [Learn more](https://www.themoviedb.org/documentation/api)
+In order to make a valid API request, an API key is required. [Learn more](https://www.themoviedb.org/documentation/api)
 
 ## Links
 
