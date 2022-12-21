@@ -1,11 +1,11 @@
 <div *ngIf="totalPages > 0" class="pagination clr-row clr-align-items-center clr-justify-content-center">
-  <div class="clr-col-auto">
-    <button *ngIf="page > 1" class="btn btn-sm" (click)="goToPage(page - 1)">Previous</button>
+  <div class="clr-col-2 clr-col-md-1">
+    <button title="Previous Page" *ngIf="page > 1" class="btn btn-sm" (click)="goToPage(page - 1)">&laquo;</button>
   </div>
   <div class="clr-col-auto">
     Page {{ page }} of {{ totalPages | number }}
   </div>
-  <div class="clr-col-auto">
-    <button *ngIf="page < totalPages" class="btn btn-sm" (click)="goToPage(page + 1)">Next</button>
+  <div class="clr-col-2 clr-col-md-1">
+    <button title="Next Page" *ngIf="page < totalPages" class="btn btn-sm" (click)="goToPage(page + 1)">&raquo;</button>
   </div>
 </div>

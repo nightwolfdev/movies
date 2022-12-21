@@ -1,4 +1,9 @@
 .pagination {
   margin-bottom: 1.2rem;
   text-align: center;
+
+  button {
+    margin-right: 0;
+    min-width: 0.5rem;
+  }
 }
