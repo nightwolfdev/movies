@@ -21,6 +21,18 @@ Movies app using Angular, RxJS, TypeScript, and the TMDB API.
 
 In order to make a valid API request, an API key is required. [Learn more](https://www.themoviedb.org/documentation/api)
 
+Once you have acquired an API key, create a file called `api.ts` in the `environments` folder with the following, replacing YOUR_API_KEY with your actual key:
+
+```
+const host = 'https://api.themoviedb.org/3';
+const key = 'YOUR_API_KEY';
+
+export {
+  host,
+  key
+}
+```
+
 ## Links
 
 * [Demo](https://nightwolf.dev/demos/movies)
