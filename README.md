@@ -2,7 +2,7 @@
 
 ![Movies App](./src/assets/img/movies-app.png)
 
-Movies app using Angular, RxJS, TypeScript, and the TMDB API.
+View Now Playing, Popular, Trending, and Upcoming Movies. Discover movies by genre, rating, watch provider, and year. View more details about each movie.
 
 ## Getting Started
 
@@ -37,6 +37,7 @@ export {
 
 * [Demo](https://nightwolf.dev/demos/movies)
 * [Angular](https://angular.io)
+* [Clarity Design System](https://clarity.design/)
 * [RxJS](https://rxjs.dev)
 * [TypeScript](https://www.typescriptlang.org)
 * [TMDB API](https://www.themoviedb.org/)
