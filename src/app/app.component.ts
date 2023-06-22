@@ -17,7 +17,14 @@ export class AppComponent implements OnInit {
   @ViewChild('contentArea') private contentArea: ElementRef;
   form: FormGroup<SearchForm>;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const route = localStorage.getItem('route');
+
+    if (route) {
+      localStorage.removeItem('route');
+      this.router.navigate([route]);
+    }
+  }
 
   ngOnInit() {
     this.form = new FormGroup<SearchForm>({
