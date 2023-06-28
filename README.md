@@ -35,7 +35,7 @@ export {
 
 ## Links
 
-* [Demo](https://nightwolf.dev/demos/movies)
+* [Demo](https://nightwolfdev.github.io/movies/)
 * [Angular](https://angular.io)
 * [Clarity Design System](https://clarity.design/)
 * [RxJS](https://rxjs.dev)
