@@ -11,7 +11,7 @@
         <div class="movie-list-item">
           <div class="movie-list-image">
             <a [routerLink]="['/movie', movie.id]">
-              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : 'https://via.placeholder.com/500?text=NO+IMAGE'" [alt]="movie.title">
+              <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : 'https://placehold.co/500?text=NO+IMAGE'" [alt]="movie.title">
             </a>
           </div>
       
@@ -37,7 +37,7 @@
         <div class="clr-col-sm-12 clr-col-md-2 clr-col-lg-1">
             <div class="movie-list-image">
               <a [routerLink]="['/movie', movie.id]">
-                <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w185/' + movie.poster_path : 'https://via.placeholder.com/185?text=NO+IMAGE'" [alt]="movie.title">
+                <img [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w185/' + movie.poster_path : 'https://placehold.co/185?text=NO+IMAGE'" [alt]="movie.title">
               </a>
             </div>
         </div>

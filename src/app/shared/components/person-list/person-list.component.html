@@ -4,7 +4,7 @@
       <div class="person-list-item">
         <div class="person-list-image">
           <a [routerLink]="['/person', person.id]">
-            <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w185/' + person.profile_path : 'https://via.placeholder.com/200x300?text=NO+PHOTO'" [alt]="person.name">
+            <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w185/' + person.profile_path : 'https://placehold.co/200x300?text=NO+PHOTO'" [alt]="person.name">
           </a>
         </div>
     

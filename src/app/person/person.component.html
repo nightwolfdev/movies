@@ -2,7 +2,7 @@
   <ng-container *ngIf="person$ | async as person; else loading">
     <div class="clr-row">
       <div class="clr-col-sm-12 clr-col-md-4">
-        <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/h632/' + person.profile_path : 'https://via.placeholder.com/800?text=NO+IMAGE'" [alt]="person.name" class="person-profile">
+        <img [src]="person.profile_path ? 'https://image.tmdb.org/t/p/h632/' + person.profile_path : 'https://placehold.co/800?text=NO+IMAGE'" [alt]="person.name" class="person-profile">
       </div>
       <div class="clr-col-sm-12 clr-col-md-8">
         <h1>{{ person.name }}</h1>
